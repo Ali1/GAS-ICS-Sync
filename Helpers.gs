@@ -349,8 +349,11 @@ function createEvent(event, calendarTz){
     newEvent.summary = "(" + calName + ") " + newEvent.summary;
   }
   
-  if (event.hasProperty('description'))
+  if (event.hasProperty('description')) {
     newEvent.description = icalEvent.description;
+    if (icalEvent._firstProp('x-alt-desc'))
+      newEvent.description = icalEvent._firstProp('x-alt-desc');
+  }
 
   if (event.hasProperty('location'))
     newEvent.location = icalEvent.location;
